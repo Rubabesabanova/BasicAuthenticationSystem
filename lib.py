@@ -7,7 +7,7 @@ class User:
         self.role="User"
 
     def ShowData(self):
-        print(f"Name : {self.name}, Surname : {self.surname}, Username : {self.username}")
+        print(f"Name : {self.name}, Surname : {self.surname}, Username : {self.username}, Role : {self.role}")
 
 
 class AdminUser(User):
