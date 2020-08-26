@@ -10,7 +10,7 @@ def login():
     while db[l_username].password != password:
         password = input("False password : ")
     print("You logged in as {} successfully ! ".format(db[l_username].role))
-
+    return l_username
 
 def loginusername(x):
     for i in range(len(db)):
