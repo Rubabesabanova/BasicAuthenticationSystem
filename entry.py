@@ -1,11 +1,16 @@
 from functions import *
 from register import *
 from login import *
+import json
+with open('db.json') as json_file:
+    db = json.load(json_file)
+
 def ExecuteOrders():
     order = InfoInput()
     while order != "0":
         if order == "1":
-            registerorder = input("Do you want to register as Admin, Editor or User ? ").lower()
+            registerorder = input(
+                "Do you want to register as Admin, Editor or User ? ").lower()
             while True:
                 if registerorder == "admin":
                     PlacingAdminstoDb()
@@ -17,77 +22,83 @@ def ExecuteOrders():
                     PlacingUserstoDb()
                     break
                 else:
-                    registerorder = input("Please type correct keyword : ").lower()
+                    registerorder = input(
+                        "Please type correct keyword : ").lower()
             order = InfoInput()
         elif order == "2":
-            l_username=login()
-            if db[l_username].role=='Admin':
-                admininfo=AdminInfo().lower()
+            l_username = login()
+            if db[l_username]['role'] == 'Admin':
+                admininfo = AdminInfo().lower()
                 while True:
-                    if admininfo=="all":
+                    if admininfo == "all":
                         ShowAllData()
-                        admininfo=AdminInfo().lower()
-                    elif admininfo=="account":
-                        db[l_username].ShowData()
-                        admininfo=AdminInfo().lower()
-                    elif admininfo=="single":
-                        showUser=input('Enter the username you want to know about : ')
-                        showUser=CheckUsernameExist(showUser)
+                        admininfo = AdminInfo().lower()
+                    elif admininfo == "account":
+                        print(db[l_username])
+                        admininfo = AdminInfo().lower()
+                    elif admininfo == "single":
+                        showUser = input(
+                            'Enter the username you want to know about : ')
+                        showUser = CheckUsernameExist(showUser)
                         ShowDataByUsername(showUser)
-                        admininfo=AdminInfo().lower()
-                    elif admininfo=="duty":
-                        changeUser=input('Enter the username you want to change : ')
-                        changeUser=CheckUsernameExist(changeUser)
+                        admininfo = AdminInfo().lower()
+                    elif admininfo == "duty":
+                        changeUser = input(
+                            'Enter the username you want to change : ')
+                        changeUser = CheckUsernameExist(changeUser)
                         CheckRole(changeUser)
-                        changeRole=input('''1. User,
+                        changeRole = input('''1. User,
 2. Editor,
 3. Admin
 To which position you want to change the user(type user, editor or admin) : ''').lower()
-                        changeRole=CheckRoleExist(changeRole)
+                        changeRole = CheckRoleExist(changeRole)
                         ChangeRole(changeUser, changeRole)
-                        admininfo=AdminInfo().lower()
-                    elif admininfo=="quit":
+                        admininfo = AdminInfo().lower()
+                    elif admininfo == "quit":
                         break
                     else:
-                        admininfo=input("Please type correct keyword : ")
+                        admininfo = input("Please type correct keyword : ")
                 order = InfoInput()
-            elif db[l_username].role=='Editor':
-                editorinfo=EditorInfo().lower()
+            elif db[l_username]['role'] == 'Editor':
+                editorinfo = EditorInfo().lower()
                 while True:
-                    if editorinfo=="all":
+                    if editorinfo == "all":
                         ShowAllData()
-                        editorinfo=EditorInfo().lower()
-                    elif editorinfo=="account":
-                        db[l_username].ShowData()
-                        editorinfo=EditorInfo().lower()
-                    elif editorinfo=="single":
-                        showUser=input('Enter the username you want to know about : ')
-                        showUser=CheckUsernameExist(showUser)
+                        editorinfo = EditorInfo().lower()
+                    elif editorinfo == "account":
+                        print(db[l_username])
+                        editorinfo = EditorInfo().lower()
+                    elif editorinfo == "single":
+                        showUser = input(
+                            'Enter the username you want to know about : ')
+                        showUser = CheckUsernameExist(showUser)
                         ShowDataByUsername(showUser)
-                        editorinfo=EditorInfo().lower()
-                    elif editorinfo=="quit":
+                        editorinfo = EditorInfo().lower()
+                    elif editorinfo == "quit":
                         break
                     else:
-                        editorinfo=input("Please type correct keyword : ")
+                        editorinfo = input("Please type correct keyword : ")
                 order = InfoInput()
-            elif db[l_username].role=='User':
-                userinfo=UserInfo().lower()
+            elif db[l_username]['role'] == 'User':
+                userinfo = UserInfo().lower()
                 while True:
-                    if userinfo=="all":
+                    if userinfo == "all":
                         ShowAllData()
-                        userinfo=UserInfo().lower()
-                    elif userinfo=="account":
-                        db[l_username].ShowData()
-                        userinfo=UserInfo().lower()
-                    elif userinfo=="quit":
+                        userinfo = UserInfo().lower()
+                    elif userinfo == "account":
+                        print(db[l_username])
+                        userinfo = UserInfo().lower()
+                    elif userinfo == "quit":
                         break
                     else:
-                        userinfo=input("Please type correct keyword : ")
+                        userinfo = input("Please type correct keyword : ")
                 order = InfoInput()
         else:
             order = input("Please type correct keyword : ").lower()
     else:
         print("Good luck !")
 
+
 ExecuteOrders()
 
+print(data)

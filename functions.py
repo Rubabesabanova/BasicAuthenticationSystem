@@ -1,5 +1,8 @@
 from lib import *
-from db import db
+import json
+import json
+with open('db.json') as json_file:
+    db = json.load(json_file)
 
 def CheckLetters(x, str):
     while not x.isalpha():
@@ -15,13 +18,10 @@ What do you want to do ? ''').lower()
 
 # Input validation
 # Checking if the input is empty
-
 def FillGaps(x):
     while not x:
         x = input("Please fill the gaps : ")
     return x
-
-
 # Validation of Student Code
 # REGISTRATION
 def CheckUserPassword(x):
@@ -31,29 +31,28 @@ def CheckUserPassword(x):
         print("You registered successfully !")
     return x
 
-
 def CheckUsername(x):
     for i in db:
-        while x == i.username:
+        while x == i['username']:
             x = input("This username is already taken. Enter new username : ")
     return x
 
 # Duties
 def ShowAllData():
     for i in db:
-        i.ShowData()
+        print(i)
 def ShowDataByUsername(x):
     userExists=False
     for i in db:
-        if x==i.username:
+        if x==i['username']:
             userExists=True
-            i.ShowData()
+            print(i)
     while userExists==False:
         x=input("There is no such user. Please enter correct username : ")
 def CheckUsernameExist(x):
     userExists=False
     for i in db:
-        if i.username==x:
+        if i['username']==x:
             userExists=True
     while userExists==False:
         x=input("There is no such user. Please enter correct username : ")
@@ -64,13 +63,13 @@ def CheckRoleExist(x):
     return x
 def CheckRole(x):
     for i in db:
-        if i.username==x:
-            role=i.role
+        if i['username']==x:
+            role=i['role']
     print(f"{x} is an {role}")
 def ChangeRole(x, y):
     for i in db:
-        if i.username==x:
-            i.role=y.capitalize()
+        if i['username']==x:
+            i['role']=y.capitalize()
             print(f"You changed the role of {x} to {y.capitalize()}")
 
 # Users

@@ -1,4 +1,5 @@
 from functions import *
+import json
 
 def Registration():
     name = input("Name : ").lower()
@@ -18,15 +19,12 @@ def Registration():
 
 def PlacingUserstoDb():
     user = User(*Registration())
-    db.append(user)
 
 
 def PlacingAdminstoDb():
     admin = AdminUser(*Registration())
-    db.append(admin)
 
 
 def PlacingEditorstoDb():
     editor = EditorUser(*Registration())
-    db.append(editor)
 
