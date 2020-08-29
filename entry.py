@@ -27,14 +27,19 @@ def ExecuteOrders():
             order = InfoInput()
         elif order == "2":
             l_username = login()
-            if db[l_username]['role'] == 'Admin':
+            if db['users'][l_username]['role'] == 'Admin':
                 admininfo = AdminInfo().lower()
                 while True:
                     if admininfo == "all":
                         ShowAllData()
                         admininfo = AdminInfo().lower()
                     elif admininfo == "account":
-                        print(db[l_username])
+                        print(db['users'][l_username])
+                        admininfo = AdminInfo().lower()
+                    elif admininfo =="change":
+                        inputList=Registration()
+                        inputList.insert(0, l_username)
+                        ChangeAccount(*inputList)
                         admininfo = AdminInfo().lower()
                     elif admininfo == "single":
                         showUser = input(
@@ -54,19 +59,41 @@ To which position you want to change the user(type user, editor or admin) : ''')
                         changeRole = CheckRoleExist(changeRole)
                         ChangeRole(changeUser, changeRole)
                         admininfo = AdminInfo().lower()
+                    elif admininfo =="add":
+                        registerorder = input(
+"Do you want to add user as Admin, Editor or User ? ").lower()
+                        while True:
+                            if registerorder == "admin":
+                                PlacingAdminstoDb()
+                                break
+                            elif registerorder == "editor":
+                                PlacingEditorstoDb()
+                                break
+                            elif registerorder == "user":
+                                PlacingUserstoDb()
+                                break
+                            else:
+                                registerorder = input(
+                                    "Please type correct keyword : ").lower()
+                        admininfo = AdminInfo().lower()
                     elif admininfo == "quit":
                         break
                     else:
                         admininfo = input("Please type correct keyword : ")
                 order = InfoInput()
-            elif db[l_username]['role'] == 'Editor':
+            elif db['users'][l_username]['role'] == 'Editor':
                 editorinfo = EditorInfo().lower()
                 while True:
                     if editorinfo == "all":
                         ShowAllData()
                         editorinfo = EditorInfo().lower()
                     elif editorinfo == "account":
-                        print(db[l_username])
+                        print(db['users'][l_username])
+                        editorinfo = EditorInfo().lower()
+                    elif editorinfo =="change":
+                        inputList=Registration()
+                        inputList.insert(0, l_username)
+                        ChangeAccount(*inputList)
                         editorinfo = EditorInfo().lower()
                     elif editorinfo == "single":
                         showUser = input(
@@ -79,14 +106,19 @@ To which position you want to change the user(type user, editor or admin) : ''')
                     else:
                         editorinfo = input("Please type correct keyword : ")
                 order = InfoInput()
-            elif db[l_username]['role'] == 'User':
+            elif db['users'][l_username]['role'] == 'User':
                 userinfo = UserInfo().lower()
                 while True:
                     if userinfo == "all":
                         ShowAllData()
                         userinfo = UserInfo().lower()
                     elif userinfo == "account":
-                        print(db[l_username])
+                        print(db['users'][l_username])
+                        userinfo = UserInfo().lower()
+                    elif userinfo =="change":
+                        inputList=Registration()
+                        inputList.insert(0, l_username)
+                        ChangeAccount(*inputList)
                         userinfo = UserInfo().lower()
                     elif userinfo == "quit":
                         break
@@ -101,4 +133,3 @@ To which position you want to change the user(type user, editor or admin) : ''')
 
 ExecuteOrders()
 
-print(data)

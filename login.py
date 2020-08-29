@@ -10,14 +10,14 @@ def login():
         l_username = loginusername(input("False username : "))
     password = input("Password : ")
     password = FillGaps(password)
-    while db[l_username]["password"] != password:
+    while db['users'][l_username]["password"] != password:
         password = input("False password : ")
-    print("You logged in as {} successfully ! ".format(db[l_username]["role"]))
+    print("You logged in as {} successfully ! ".format(db['users'][l_username]["role"]))
     return l_username
 
 def loginusername(x):
-    for i in range(len(db)):
-        if db[i]['username'] == x:
+    for i in range(len(db['users'])):
+        if db['users'][i]['username'] == x:
             return i
     return 7
 

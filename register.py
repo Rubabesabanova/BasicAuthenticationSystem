@@ -18,13 +18,13 @@ def Registration():
 
 
 def PlacingUserstoDb():
-    user = User(*Registration())
-
+    user=User(*Registration())
+    user.addToJson()
 
 def PlacingAdminstoDb():
-    admin = AdminUser(*Registration())
-
+    admin=AdminUser(*Registration())
+    admin.addToJson()
 
 def PlacingEditorstoDb():
-    editor = EditorUser(*Registration())
-
+    editor=EditorUser(*Registration())
+    editor.addToJson()

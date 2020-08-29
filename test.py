@@ -1,9 +1,7 @@
-mydics={
-    "name":"samir",
-    "surname":"kerimov"
-}
+def example():
+    x="LEGB rule"
+    print(x)
 
+example()
 
-for key,value in mydics.items():
-    if key=="name" and value=="samir":
-        print('NO')
+print(x)
